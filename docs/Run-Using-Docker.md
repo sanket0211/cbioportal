@@ -33,10 +33,10 @@ You can download these files by using the links below:
 
 You will need the following configuration files.
 
-- [portal.properties](docs/Pre-Build-Steps.md#prepare-property-files)
-- [log4j.properties](docs/Pre-Build-Steps.md#prepare-the-log4jproperties-file)
-- [settings.xml](docs/Pre-Build-Steps.md#create-a-maven-settings-file)
-- [context.xml](docs/Deploying.md#set-up-the-database-connection-pool)
+- [portal.properties](Pre-Build-Steps.md#prepare-property-files)
+- [log4j.properties](Pre-Build-Steps.md#prepare-the-log4jproperties-file)
+- [settings.xml](Pre-Build-Steps.md#create-a-maven-settings-file)
+- [context.xml](Deploying.md#set-up-the-database-connection-pool)
 - gene_sets.txt (optional) | Pending
 - Logos (optional) | Pending
 
@@ -44,10 +44,51 @@ You can download some example files from here:
 
 ## Install cBioPortal using docker in 5'
 
+### Create Docker Network
 
+```bash
+docker network create "cbioportal-net"
+```
 
+### Run MySQL Docker container
 
+```bash
+docker run -d --name "{CONTAINER-NAME}" \
+--restart=always \
+--net="{DOCKER-NETWORK-NAME}" \
+-p "{PREFERRED-EXTERNAL-PORT}":3306 \
+-e MYSQL_ROOT_PASSWORD="{MYSQL-ROOT-PASSWORD}" \
+-v "{/PATH/TO/MYSQL/DATA}":/var/lib/mysql \
+-v "{/PATH/TO/SEED/DATABASE}"/cgds.sql:/docker-entrypoint-initdb.d/cgds.sql:ro \
+-v "{/PATH/TO/SEED/DATABASE}"/seed-cbioportal_no-pdb_hg19.sql.gz:/docker-entrypoint-initdb.d/seed_part1.sql.gz:ro \
+-v "{/PATH/TO/SEED/DATABASE}"/seed-cbioportal_only-pdb.sql.gz:/docker-entrypoint-initdb.d/seed_part2.sql.gz:ro \
+mysql
+```
 
+### Run DB Migrations
+
+```bash
+docker run --rm -it --net cbioportal-net \
+cbioportal/cbioportal \
+migrate_db.py -p /cbioportal/src/main/resources/portal.properties -s /cbioportal/core/src/main/resources/db/migration.sql
+```
+
+### Run cBioPortal Container
+
+```bash
+docker run -d --name "{CONTAINER-NAME}" \
+--restart=always \
+--net="{DOCKER-NETWORK-NAME}" \
+-p "{PREFERRED-EXTERNAL-PORT}":8080 \
+-v "{/PATH/TO/portal.properties}":/cbioportal/src/main/resources/portal.properties:ro \
+-v "{/PATH/TO/log4j.properties}":/cbioportal/src/main/resources/log4j.properties:ro \
+-v "{/PATH/TO/settings.xml}":/root/.m2/settings.xml:ro \
+-v "{/PATH/TO/context.xml}":/usr/local/tomcat/conf/context.xml:ro \
+-v "{/PATH/TO/CBIOPORTAL-LOGS}":/cbioportal_logs/ \
+-v "{/PATH/TO/TOMCAT-LOGS}":/usr/local/tomcat/logs/ \
+-v "{/PATH/TO/STUDIES}":/cbioportal_studies/:ro \
+cbioportal/cbioportal:{TAG}
+```
 
 ## cBioPortal Setup
 
