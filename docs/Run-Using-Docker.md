@@ -42,9 +42,9 @@ You will need the following configuration files.
 
 You can download some example files from here:
 
-## Install cBioPortal using docker in 5'
+## Quickstart Guide
 
-### Create Docker Network
+### Step 1 - Create Docker Network
 
 ```bash
 docker network create "cbioportal-net"
