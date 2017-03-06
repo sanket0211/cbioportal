@@ -154,7 +154,7 @@ Where:
 
 Running the above command will create a MySQL docker container and will automatically import all Seed Databases.
 
-** _Important_ **
+_ **Important** _    
 This process might take several minutes to complete depending on your computer.
 
 #### 2.2.2 MySQL Logs monitoring in Docker
