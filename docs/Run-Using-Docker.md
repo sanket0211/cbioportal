@@ -40,13 +40,13 @@ You can download some example files from here:
 
 ## Quickstart Guide
 
-### Step 1 - Create Docker Network
+### Step 1 - Create a Docker Network
 
 ```bash
 docker network create "cbioportal-net"
 ```
 
-### Run MySQL Docker container
+### Step 2 - Run MySQL Docker container
 
 ```bash
 docker run -d --name "{CONTAINER-NAME}" \
@@ -61,7 +61,7 @@ docker run -d --name "{CONTAINER-NAME}" \
 mysql
 ```
 
-### Run DB Migrations
+### Step 3 - Run DB Migrations
 
 ```bash
 docker run --rm -it --net cbioportal-net \
@@ -69,7 +69,7 @@ cbioportal/cbioportal \
 migrate_db.py -p /cbioportal/src/main/resources/portal.properties -s /cbioportal/core/src/main/resources/db/migration.sql
 ```
 
-### Run cBioPortal Container
+### Step 4 - Run cBioPortal Container
 
 ```bash
 docker run -d --name "{CONTAINER-NAME}" \
@@ -86,23 +86,9 @@ docker run -d --name "{CONTAINER-NAME}" \
 cbioportal/cbioportal:{TAG}
 ```
 
-## cBioPortal Setup
+## Detailed Guide
 
-## 1. Database Setup
-
-As of this writing, the cBioPortal software runs properly on MySQL version 5.0.x. The software can be found and downloaded from the [MySQL website](https://www.mysql.com).
-
-There are two options to set up the cBioPortal Database:    
-1. Run MySQL on the host.    
-2. Run MySQL as a Docker container.    
-
-### 1.1 Run MySQL on the host
-
-To install MySQL 5.7, kindly follow the vendor’s official detailed installation guide, available [here](http://dev.mysql.com/doc/refman/5.7/en/installing.html).
-
-### 1.2 Run MySQL as a docker container
-
-#### 1.2.1 Create a docker network
+#### 1. Create a docker network
 
 Because MySQL and cBioPortal are running on separate containers, docker needs to know how to link them. Using Docker's legacy `--link` flag tends to be fragile since it will break if the MySQL container is restarted. 
 
@@ -127,7 +113,21 @@ Running the above command will create a docker network called **"cbioportal-net"
 - [Docker container networking](https://docs.docker.com/engine/userguide/networking/).
 - [Docker network create](https://docs.docker.com/engine/reference/commandline/network_create/).
 
-#### 1.2.2 Launch MySQL docker container
+## 2. Database Setup
+
+As of this writing, the cBioPortal software runs properly on MySQL version 5.0.x. The software can be found and downloaded from the [MySQL website](https://www.mysql.com).
+
+There are two options to set up the cBioPortal Database:    
+1. Run MySQL on the host.    
+2. Run MySQL as a Docker container.    
+
+### 2.1 Run MySQL on the host
+
+To install MySQL 5.7, kindly follow the vendor’s official detailed installation guide, available [here](http://dev.mysql.com/doc/refman/5.7/en/installing.html).
+
+### 2.2 Run MySQL as a docker container
+
+#### 2.2.1 Launch MySQL docker container
 
 In a docker terminal type the following command:
 
@@ -157,7 +157,7 @@ Running the above command will create a MySQL docker container and will automati
 ** _Important_ **
 This process might take several minutes to complete depending on your computer.
 
-#### MySQL Logs monitoring in Docker
+#### 2.2.2 MySQL Logs monitoring in Docker
 
 MySQL logs can easily be monitored by executing the following command on a terminal with docker.
 
@@ -170,11 +170,11 @@ Where:
 
 Learn more on [docker logs](https://docs.docker.com/engine/reference/commandline/logs/).
 
-#### Useful Resources
+#### 2.2.3 Useful Resources
 [MySQL Docker Hub](https://hub.docker.com/_/mysql/)    
 [MySQL Docker Github](https://github.com/docker-library/docs/tree/master/mysql)
 
-#### Access mysql shell on docker container
+#### 2.2.4 Access mysql shell on docker container
 
 To access the `mysql` shell on a docker container simply execute the following command:
 
@@ -186,9 +186,9 @@ Where:
 - **{CONTAINER-NAME}**: The name of your container instance _i.e **cbio-DB**_.
 - **{MYSQL-ROOT-PASSWORD}**: The root password for the MySQL installation. For password restrictions please read carefully this [link](http://dev.mysql.com/doc/refman/5.7/en/user-names.html).
 
-## 2. cBioPortal Setup
+## 3. cBioPortal Setup
 
-### 2.1 Run DB Migrations
+### 3.1 Run DB Migrations
 
 ```bash
 docker run --rm -it --net "{DOCKER-NETWORK-NAME}" \
@@ -200,7 +200,7 @@ Where:
 - **{DOCKER-NETWORK-NAME}**: The name of your network, _i.e **cbioportal-net**_.
 - **{TAG}**: The cBioPortal Version that you would like to run, _i.e **latest**_.
 
-### 2.2 Run the cBioPortal docker container 
+### 3.2 Run the cBioPortal docker container 
 
 ```bash
 docker run -d --name "{CONTAINER-NAME}" \
