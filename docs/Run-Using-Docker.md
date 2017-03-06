@@ -1,15 +1,57 @@
-# Run cBioPortal using Docker
+# Run using Docker
+
+[![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/cbioportal/cbioportal/) [![Docker Pulls](https://img.shields.io/docker/pulls/cbioportal/cbioportal.svg)](https://hub.docker.com/r/cbioportal/cbioportal/) [![Docker Stars](https://img.shields.io/docker/stars/cbioportal/cbioportal.svg)](https://hub.docker.com/r/cbioportal/cbioportal/)
 
 Docker provides a way to run applications securely isolated in a container, packaged with all its dependencies and libraries.
-
 To learn more on Docker, kindly refer here: [What is Docker?](https://www.docker.com/what-docker).
 
-## 1. Install Docker
+## Supported tags and respective `Dockerfile` links
 
-First, make sure that you have the latest version of Docker installed on your machine.    
-[Get Docker latest version](https://www.docker.com/products/overview#/install_the_platform)
+-       [`latest` (*latest/Dockerfile*)](https://github.com/cBioPortal/cbioportal/blob/latest/Dockerfile)
+-       [`1.4.3` (*1.4.3/Dockerfile*)](https://github.com/cBioPortal/cbioportal/blob/1.4.3/Dockerfile)
 
-## 2. Database Setup
+## Prerequisites
+
+- 1. Install Docker
+- 2. Download Seed DB
+- 3. Prepare Configuration Files
+
+### 1. Install Docker
+
+First, make sure that you have the latest version of Docker installed on your machine. [Get latest version](https://www.docker.com/products/overview#/install_the_platform)
+
+### 2. Download Seed DB
+
+The latest cBioPortal Seed files are available from the [cbioportal datahub](https://github.com/cBioPortal/datahub/tree/master/seedDB).    
+You can download these files by using the links below:
+
+- **Schema 1.3.0**: [SQL file with create table statements for portal release 1.3.1](https://raw.githubusercontent.com/cBioPortal/cbioportal/v1.3.1/core/src/main/resources/db/cgds.sql) 
+- **Seed data, part1**: [cbioportal-seed SQL (.gz) file - part1 (no pdb_ tables)](https://github.com/cbioportal/datahub/raw/b69c86803c40d543080bf31a645721d06c82d08d/seedDB/seed-cbioportal_no-pdb_hg19.sql.gz)
+- **Seed data, part2 (optional)** [cbioportal-seed SQL (.gz) file - part2 (only pdb_ tables)](https://github.com/cbioportal/datahub/raw/b69c86803c40d543080bf31a645721d06c82d08d/seedDB/seed-cbioportal_only-pdb.sql.gz)
+
+### 3. Prepare Configuration Files
+
+You will need the following configuration files.
+
+- [portal.properties](docs/Pre-Build-Steps.md#prepare-property-files)
+- [log4j.properties](docs/Pre-Build-Steps.md#prepare-the-log4jproperties-file)
+- [settings.xml](docs/Pre-Build-Steps.md#create-a-maven-settings-file)
+- [context.xml](docs/Deploying.md#set-up-the-database-connection-pool)
+- gene_sets.txt (optional) | Pending
+- Logos (optional) | Pending
+
+You can download some example files from here:
+
+## Install cBioPortal using docker in 5'
+
+
+
+
+
+
+## cBioPortal Setup
+
+## 1. Database Setup
 
 As of this writing, the cBioPortal software runs properly on MySQL version 5.0.x. The software can be found and downloaded from the [MySQL website](https://www.mysql.com).
 
@@ -17,13 +59,13 @@ There are two options to set up the cBioPortal Database:
 1. Run MySQL on the host.    
 2. Run MySQL as a Docker container.    
 
-### 2.1 Run MySQL on the host
+### 1.1 Run MySQL on the host
 
 To install MySQL 5.7, kindly follow the vendor’s official detailed installation guide, available [here](http://dev.mysql.com/doc/refman/5.7/en/installing.html).
 
-### 2.2 Run MySQL as a docker container
+### 1.2 Run MySQL as a docker container
 
-#### 2.2.1 Create a docker network
+#### 1.2.1 Create a docker network
 
 Because MySQL and cBioPortal are running on separate containers, docker needs to know how to link them. Using Docker's legacy `--link` flag tends to be fragile since it will break if the MySQL container is restarted. 
 
@@ -47,7 +89,7 @@ Running the above command will create a docker network called **"cbioportal-net"
 - Learn more on [docker container networking](https://docs.docker.com/engine/userguide/networking/).
 - Learn more on [docker network create](https://docs.docker.com/engine/reference/commandline/network_create/).
 
-#### 2.2.2 Launch MySQL docker container
+#### 1.2.2 Launch MySQL docker container
 
 In a docker terminal type the following command:
 
@@ -88,7 +130,7 @@ Learn more on [docker logs](https://docs.docker.com/engine/reference/commandline
 [MySQL Docker Hub](https://hub.docker.com/_/mysql/)    
 [MySQL Docker Github](https://github.com/docker-library/docs/tree/master/mysql)
 
-### 2.3 Create the cBioPortal MySQL Databases and User
+### 1.3 Create the cBioPortal MySQL Databases and User
 
 You must create a `cbioportal` database and a `cgds_test` database within MySQL, and a user account with rights to access both databases.  This is done via the `mysql` shell.
 
@@ -131,13 +173,13 @@ Where:
 - **{CONTAINER-NAME}**: The name of your container instance _i.e **cbio-DB**_.
 - **{MYSQL-ROOT-PASSWORD}**: The root password for the MySQL installation. For password restrictions please read carefully this [link](http://dev.mysql.com/doc/refman/5.7/en/user-names.html).
 
-### 3.3 Import the cBioPortal Database (Pending)
+### 2.3 Import the cBioPortal Database (Pending)
 
 coming soon ...
 
-## 4. cBioPortal Setup (Pending)
+## 3. cBioPortal Setup (Pending)
 
-### 4.1 Prepare Configuration files (Pending)
+### 3.1 Prepare Configuration files (Pending)
 
 Coming soon...
 - [portal.properties](docs/Pre-Build-Steps.md#prepare-property-files)
