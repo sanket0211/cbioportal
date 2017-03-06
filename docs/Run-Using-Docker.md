@@ -12,10 +12,6 @@ To learn more on Docker, kindly refer here: [What is Docker?](https://www.docker
 
 ## Prerequisites
 
-- 1. Install Docker
-- 2. Download Seed DB
-- 3. Prepare Configuration Files
-
 ### 1. Install Docker
 
 First, make sure that you have the latest version of Docker installed on your machine. [Get latest version](https://www.docker.com/products/overview#/install_the_platform)
