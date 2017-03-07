@@ -1,12 +1,12 @@
 # Deploy Using Docker
 
-:warning: Please make sure to complete all [Docker prerequisites](Docker-Prerequisites.md) before moving forward.
+:warning: Please make sure to review [Docker prerequisites](Docker-Prerequisites.md) before continuing with deployment.
 
 ## 1. Create a docker network
 
 Because MySQL and cBioPortal are running on separate containers, docker needs to know how to link them. Using Docker's legacy `--link` flag tends to be fragile since it will break if the MySQL container is restarted. 
 
-To get around this, we can use the newer `Docker networks` feature by typing the following command:
+To get around this, we can use the newer `Docker networks` feature by typing the following command in a docker terminal:
 
 #### Template
 
@@ -23,8 +23,6 @@ Where:
 docker network create "cbio-net"
 ```
 
-Running the above command will create a docker network called **"cbio-net"**.
-
 #### Useful Resources
 - [Docker container networking](https://docs.docker.com/engine/userguide/networking/).
 - [Docker network create](https://docs.docker.com/engine/reference/commandline/network_create/).
@@ -34,8 +32,8 @@ Running the above command will create a docker network called **"cbio-net"**.
 As of this writing, the cBioPortal software runs properly on MySQL version 5.0.x. The software can be found and downloaded from the [MySQL website](https://www.mysql.com).
 
 There are two options to set up the cBioPortal Database:    
-1. Run MySQL on the host.    
-2. Run MySQL as a Docker container.    
+2.1 Run MySQL on the host.    
+2.2 Run MySQL as a Docker container.    
 
 ### 2.1 Run MySQL on the host
 
@@ -99,11 +97,7 @@ Where:
 
 Learn more on [docker logs](https://docs.docker.com/engine/reference/commandline/logs/).
 
-#### 2.2.3 Useful Resources
-[MySQL Docker Hub](https://hub.docker.com/_/mysql/)    
-[MySQL Docker Github](https://github.com/docker-library/docs/tree/master/mysql)
-
-#### 2.2.4 Access mysql shell on docker container
+#### 2.2.3 Access mysql shell on docker container
 
 To access the `mysql` shell on a docker container simply execute the following command:
 
@@ -117,9 +111,17 @@ Where:
 - **{CONTAINER_NAME}**: The name of your container instance _i.e **cbio-DB**_.
 - **{MYSQL_ROOT_PASSWORD}**: The root password for the MySQL installation. For password restrictions please read carefully this [link](http://dev.mysql.com/doc/refman/5.7/en/user-names.html).
 
+#### 2.2.4 Useful Resources
+[MySQL Docker Hub](https://hub.docker.com/_/mysql/)    
+[MySQL Docker Github](https://github.com/docker-library/docs/tree/master/mysql)
+
 ## 3. cBioPortal Setup
 
 ### 3.1 Run DB Migrations
+
+Update the seeded database schema to match the cBioPortal version in the image.
+
+:warning: Running the following docker command will most likely make your database irreversibly incompatible with older versions of the portal code.
 
 ##### Template
 
@@ -134,6 +136,8 @@ Where:
 - **{TAG}**: The cBioPortal Version that you would like to run, _i.e **latest**_.
 
 ### 3.2 Run the cBioPortal docker container 
+
+In a docker terminal type the following command:
 
 ##### Template
 

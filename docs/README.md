@@ -30,7 +30,7 @@ We also maintain an active [list of RFCs (Requests for Comments)](RFC-List.md) w
 * [More portal.properties Settings](portal.properties-Reference.md)
 
 ### 2.4 Docker
-* [Prerequisites](Docker-Prerequisites.md)
+* [Docker Prerequisites](Docker-Prerequisites.md)
 * [Deploy using Docker](Deploy-Using-Docker.md)
 * [Uninstall Docker cBioPortal](Uninstall-Docker-cBioPortal.md)
 * [Import a Study Using Docker](Import-Study-Using-Docker.md)
