@@ -35,7 +35,7 @@ You can download example files from [here]().
 
 ## Deployment
 
-#### 1. Create a docker network
+### 1. Create a docker network
 
 Because MySQL and cBioPortal are running on separate containers, docker needs to know how to link them. Using Docker's legacy `--link` flag tends to be fragile since it will break if the MySQL container is restarted. 
 
@@ -62,7 +62,7 @@ Running the above command will create a docker network called **"cbioportal-net"
 - [Docker container networking](https://docs.docker.com/engine/userguide/networking/).
 - [Docker network create](https://docs.docker.com/engine/reference/commandline/network_create/).
 
-## 2. Database Setup
+### 2. Database Setup
 
 As of this writing, the cBioPortal software runs properly on MySQL version 5.0.x. The software can be found and downloaded from the [MySQL website](https://www.mysql.com).
 
@@ -70,13 +70,13 @@ There are two options to set up the cBioPortal Database:
 1. Run MySQL on the host.    
 2. Run MySQL as a Docker container.    
 
-### 2.1 Run MySQL on the host
+#### 2.1 Run MySQL on the host
 
 To install MySQL 5.7, kindly follow the vendor’s official detailed installation guide, available [here](http://dev.mysql.com/doc/refman/5.7/en/installing.html).
 
-### 2.2 Run MySQL as a docker container
+#### 2.2 Run MySQL as a docker container
 
-#### 2.2.1 Launch MySQL docker container
+##### 2.2.1 Launch MySQL docker container
 
 In a docker terminal type the following command:
 
@@ -147,9 +147,9 @@ Where:
 - **{CONTAINER_NAME}**: The name of your container instance _i.e **cbio-DB**_.
 - **{MYSQL_ROOT_PASSWORD}**: The root password for the MySQL installation. For password restrictions please read carefully this [link](http://dev.mysql.com/doc/refman/5.7/en/user-names.html).
 
-## 3. cBioPortal Setup
+### 3. cBioPortal Setup
 
-### 3.1 Run DB Migrations
+#### 3.1 Run DB Migrations
 
 **Template**
 
@@ -163,7 +163,7 @@ Where:
 - **{DOCKER_NETWORK_NAME}**: The name of your network, _i.e **cbioportal-net**_.
 - **{TAG}**: The cBioPortal Version that you would like to run, _i.e **latest**_.
 
-### 3.2 Run the cBioPortal docker container 
+#### 3.2 Run the cBioPortal docker container 
 
 **Template**
 
