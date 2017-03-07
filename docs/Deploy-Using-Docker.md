@@ -117,25 +117,7 @@ Where:
 
 ## 3. cBioPortal Setup
 
-### 3.1 Run DB Migrations
-
-Update the seeded database schema to match the cBioPortal version in the image.
-
-:warning: Running the following docker command will most likely make your database irreversibly incompatible with older versions of the portal code.
-
-##### Template
-
-```bash
-docker run --rm -it --net "{DOCKER_NETWORK_NAME}" \
-cbioportal/cbioportal:"{TAG}" \
-migrate_db.py -p /cbioportal/src/main/resources/portal.properties -s /cbioportal/core/src/main/resources/db/migration.sql
-```
-
-Where:    
-- **{DOCKER_NETWORK_NAME}**: The name of your network, _i.e **cbio-net**_.
-- **{TAG}**: The cBioPortal Version that you would like to run, _i.e **latest**_.
-
-### 3.2 Run the cBioPortal docker container 
+### 3.1 Run the cBioPortal docker container 
 
 In a docker terminal type the following command:
 
@@ -169,3 +151,19 @@ Where:
 - **{/PATH/TO/TOMCAT-LOGS}**: The external path where you want Tomcat Logs to be stored.
 - **{/PATH/TO/STUDIES}**: The external path where cBioPortal studies are stored.
 - **{TAG}**: The cBioPortal Version that you would like to run, _i.e **latest**_.
+
+### 3.2 Run DB Migrations
+
+Update the seeded database schema to match the cBioPortal version in the image.
+
+:warning: Running the following docker command will most likely make your database irreversibly incompatible with older versions of the portal code.
+
+##### Template
+
+```bash
+docker exec -it "{CONTAINER_NAME}" \
+migrate_db.py -p /cbioportal/src/main/resources/portal.properties -s /cbioportal/db-scripts/src/main/resources/migration.sql
+```
+
+Where:    
+- **{CONTAINER_NAME}**: The name of your network, _i.e **cbioportal**_.
