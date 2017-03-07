@@ -155,7 +155,7 @@ Where:
 
 ```bash
 docker run --rm -it --net "{DOCKER_NETWORK_NAME}" \
-cbioportal/cbioportal:{TAG} \
+cbioportal/cbioportal:"{TAG}" \
 migrate_db.py -p /cbioportal/src/main/resources/portal.properties -s /cbioportal/core/src/main/resources/db/migration.sql
 ```
 
@@ -179,7 +179,7 @@ docker run -d --name "{CONTAINER_NAME}" \
     -v "{/PATH/TO/CBIOPORTAL-LOGS}":/cbioportal_logs/ \
     -v "{/PATH/TO/TOMCAT-LOGS}":/usr/local/tomcat/logs/ \
     -v "{/PATH/TO/STUDIES}":/cbioportal_studies/:ro \
-    cbioportal/cbioportal:{TAG}
+    cbioportal/cbioportal:"{TAG}"
 ```
 
 Where:    
