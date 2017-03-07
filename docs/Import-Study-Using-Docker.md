@@ -1,8 +1,10 @@
-Import Study Using Docker
+# Import Study Using Docker
+
+:warning: Please make sure to restart tomcat every time you add/remove/overwrite a study
 
 ## Adding a Study
 
-:warning: Please make sure to restart tomcat every time you update a study
+In a docker terminal type the following command:
 
 ```bash
 docker exec -it "{CBIOPORTAL_CONTAINER_NAME}" \
@@ -15,4 +17,26 @@ Where:
 
 ## Removing a Study
 
+In a docker terminal type the following command:
+
+```bash
+docker exec -it "{CBIOPORTAL_CONTAINER_NAME}" \
 Coming soon...
+```
+
+Where:    
+- **{CBIOPORTAL_CONTAINER_NAME}**: The name of your cbioportal container instance, _i.e **cbioportal**_.
+- **{/PATH/TO/STUDIES}**: The external path where cBioPortal studies are stored.
+
+
+## Restarting Tomcat
+
+In a docker terminal type the following command:
+
+```bash
+docker exec -it "{CBIOPORTAL_CONTAINER_NAME}" \
+Coming soon...
+```
+
+Where:    
+- **{CBIOPORTAL_CONTAINER_NAME}**: The name of your cbioportal container instance, _i.e **cbioportal**_.
