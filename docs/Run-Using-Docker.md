@@ -41,7 +41,7 @@ Because MySQL and cBioPortal are running on separate containers, docker needs to
 
 To get around this, we can use the newer `Docker networks` feature by typing the following command:
 
-**Template**
+#### Template
 
 ```bash
 docker network create "{DOCKER_NETWORK_NAME}"
@@ -50,7 +50,7 @@ docker network create "{DOCKER_NETWORK_NAME}"
 Where:
 - **{DOCKER_NETWORK_NAME}** is the name of the network that cBioPortal and the cBioPortal DB are going to be accessible. _i.e If the network is called **"cbioportal-net"** the command should be:_
 
-**Example**
+#### Example
 
 ```bash
 docker network create "cbioportal-net"
@@ -80,7 +80,7 @@ To install MySQL 5.7, kindly follow the vendor’s official detailed installatio
 
 In a docker terminal type the following command:
 
-**Template**
+#### Template
 
 ```bash
 docker run -d --name "{CONTAINER_NAME}" \
@@ -111,14 +111,14 @@ Where:
 
 Running the above command will create a MySQL docker container and will automatically import all Seed Databases.
 
-**Important**    
+#### Important
 This process might take several minutes to complete depending on your computer.
 
 #### 2.2.2 MySQL Logs monitoring in Docker
 
 MySQL logs can easily be monitored by executing the following command on a terminal with docker.
 
-**Template**
+#### Template
 
 ```bash
 docker logs "{CONTAINER_NAME}"
@@ -137,7 +137,7 @@ Learn more on [docker logs](https://docs.docker.com/engine/reference/commandline
 
 To access the `mysql` shell on a docker container simply execute the following command:
 
-**Template**
+##### Template
 
 ```bash
 docker exec -it "{CONTAINER_NAME}" mysql -p"{MYSQL_ROOT_PASSWORD}"
@@ -151,7 +151,7 @@ Where:
 
 #### 3.1 Run DB Migrations
 
-**Template**
+##### Template
 
 ```bash
 docker run --rm -it --net "{DOCKER_NETWORK_NAME}" \
@@ -165,7 +165,7 @@ Where:
 
 #### 3.2 Run the cBioPortal docker container 
 
-**Template**
+##### Template
 
 ```bash
 docker run -d --name "{CONTAINER_NAME}" \
